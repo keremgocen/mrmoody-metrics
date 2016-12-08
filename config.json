@@ -1,0 +1,5 @@
+{
+    "msg": "config data",
+    "target_url" : "https://mrmoody-92198.firebaseio.com/votes.json",
+    "api_key" : "Bearer <your-user-id>"
+}
