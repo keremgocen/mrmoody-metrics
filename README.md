@@ -4,9 +4,10 @@
 https://golang.org/doc/install
 
 ### Run the basic app
->go get github.com/keremgocen/mrmoody-metrics
 
->mrmoody-metrics
+`go get github.com/keremgocen/mrmoody-metrics`
+
+`mrmoody-metrics`
 
 ### Requirements
 
