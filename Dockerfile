@@ -1,4 +1,5 @@
 FROM scratch
-ADD mrmoody-metrics /app
+CMD ["apt-get install -y ca-certificates"]
+ADD mrmoody /app
 ADD config.json /
-CMD ["/app"]
+CMD ["./app"]

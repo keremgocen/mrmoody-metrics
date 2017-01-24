@@ -2,8 +2,8 @@
     "msg": "config data",
     "target_url" : "https://mrmoody-92198.firebaseio.com/votes.json",
     "api_key" : "Bearer <your-user-id>",
-    "update_period_minutes" : 5,
-    "db_address" : "http://localhost:8086",
+    "update_period_minutes" : 2,
+    "db_address" : "http://0.0.0.0:8086",
     "db_name": "",
     "db_user": "",
     "db_pass": ""

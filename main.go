@@ -48,7 +48,7 @@ func main() {
 	}
 
 	// DEBUG TODO use seconds
-	dur := time.Minute * time.Duration(period)
+	dur := time.Second * time.Duration(period)
 	ticker := time.NewTicker(dur)
 	done := make(chan bool, 1)
 	go func(done chan bool) {
@@ -99,7 +99,7 @@ func fetchFirebaseData(URL, key string) ([]byte, error) {
 	// create request to parse Firebase data
 	req, err := http.NewRequest("GET", URL, nil)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 	req.Header.Add("Authentication", key)
 
@@ -117,32 +117,29 @@ func fetchFirebaseData(URL, key string) ([]byte, error) {
 	// q.Add("print", "pretty")
 	req.URL.RawQuery = q.Encode()
 
-	log.Println(req.URL.String())
-
 	// log outgoing request
 	dump, err := httputil.DumpRequestOut(req, true)
 	if err != nil {
 		log.Fatal(err)
 		return nil, err
 	}
-	log.Printf("%q\n", dump)
+
+	log.Println("Outgoing request", string(dump))
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		log.Println("error reading results from", URL)
-		log.Println("status", resp.Status)
-		log.Fatal(err)
 		return nil, err
 	}
+
 	defer resp.Body.Close()
 
 	b, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatal(err)
 		return nil, err
 	}
 
-	return b, err
+	return b, nil
 }
 
 func unixMilli(t time.Time) int64 {

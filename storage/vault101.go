@@ -17,7 +17,7 @@ type User struct {
 type Campaign map[string]User
 type Votes map[string]Campaign
 
-// Create a new client
+// Setup creates a new InfluxDB client.
 func Setup(user, pass, addr string) client.Client {
 
 	// NOTE: this assumes you've setup a user and have setup shell env variables,
@@ -34,7 +34,7 @@ func Setup(user, pass, addr string) client.Client {
 	return c
 }
 
-// Create a Database with a query
+// CreateDB creates a new InfluxDB database with the given name.
 func CreateDB(c client.Client, dbName string) error {
 
 	s := []string{"CREATE DATABASE "}
@@ -48,7 +48,7 @@ func CreateDB(c client.Client, dbName string) error {
 	return nil
 }
 
-// Create a batch and add a point
+// WriteBatchPoints creates points using votes data and writes them into InfluxDB as a batch.
 func WriteBatchPoints(c client.Client, p Votes, dbName string) error {
 	// Create a new point batch
 	bp, _ := client.NewBatchPoints(client.BatchPointsConfig{
@@ -84,7 +84,7 @@ func WriteBatchPoints(c client.Client, p Votes, dbName string) error {
 	return nil
 }
 
-// Make a Query
+// Query makes a static query.
 func Query(c client.Client, dbName string) error {
 	q := client.NewQuery("SELECT * FROM campaign", dbName, "s")
 	if response, err := c.Query(q); err == nil && response.Error() == nil {

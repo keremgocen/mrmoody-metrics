@@ -9,6 +9,13 @@ https://golang.org/doc/install
 
 `mrmoody-metrics`
 
+### Build with Docker Compose
+
+`env GOOS=linux GOARCH=386 go build`
+`CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o mrmoody .`
+
+`docker-compose up`
+
 ### Requirements
 
 #### Config
